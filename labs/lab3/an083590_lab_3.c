@@ -1,24 +1,38 @@
 #include <stdio.h>
+#include <stdlib.h>
 typedef struct node {
   int data;
   struct node *next;
 } node;
 void markEven(node *head) {
-  node* tempNode = head;
-  
+  //make temporary node to traverse the linked list
+  node *tempNode = head;
 
+  //while loop to iterate through linked list and move tempNode to next until tempNode is NULL
   while (tempNode != NULL) {
+
+    //check if tempNode value is divisible by 2
     if (tempNode->data % 2 == 0) {
+      //allocate memory to the new node
       node *add = malloc(sizeof(node));
-    
+
+      //set data of new node to -1
       add->data = -1;
+      //set next value of new node to the tempNode next value
       add->next = tempNode->next;
-      //tempNode->next = add;
+      //set tempNode next value to the new node
+      tempNode->next = add;
+
+      //go to the next value of the linked list, can go to add->next because we already know the -1 value is not divisble by 2
+      tempNode = add->next;
+    } else {
+      //go to the next value of the linked list
+      tempNode = tempNode->next;
     }
+
     
-    tempNode++;
+
   }
-  
 }
 void deallocateList(node **head) {
   node *tmp = *head;
