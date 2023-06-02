@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 struct node {
     int value;
@@ -7,7 +8,7 @@ struct node {
 
 void insertAtBeginning(int value, struct node *phead) {
 
-    struct node *newNode;
+    struct node *newNode = malloc(sizeof(struct node));
 
     newNode->value = value;
     newNode->next = phead;
@@ -21,12 +22,15 @@ void delete() {
 
 void display(struct node *phead) {
 
-    struct node *currentNode;
+    struct node *currentNode = malloc(sizeof(struct node));
+    currentNode = phead;
 
     while (currentNode->next != NULL) {
         printf("%d\n", currentNode->value);
         currentNode = currentNode->next;
     }
+
+    printf("%d\n", currentNode->value);
 
 }
 
