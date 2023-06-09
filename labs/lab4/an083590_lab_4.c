@@ -15,10 +15,12 @@ int length(node* head)
 		return count;
 	}
 
-	while (head->next != NULL) {
+	while (head != NULL) {
 		count++;
 		head = head->next;
 	}
+
+	return count;
 }
 
 // parses the string in the linkedList
@@ -36,6 +38,8 @@ char* toCString(node* head)
 	}
 
 	string[stringLength + 1] = '\0';
+
+	return string;
 }
 
 // inserts character to the linkedlist
@@ -67,6 +71,14 @@ void insertChar(node** pHead, char c)
 // deletes all nodes in the linkedList.
 void deleteList(node** pHead)
 {
+
+	node *tmp = *pHead;
+	while (tmp != NULL) {
+		*pHead = tmp->next;
+		free(tmp);
+		tmp = *pHead;
+	}
+	*pHead = NULL;
 }
 
 int main(void)
