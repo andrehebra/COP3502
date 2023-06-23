@@ -3,11 +3,20 @@
 
 int search(int numbers[], int low, int high, int value) 
 {
-    if (numbers[high] == value) {
-        return high;
-    } else if (high > low) {
-        return search(numbers, low, high-1, value);
+
+    int index = ((high - low) / 2) + low;
+
+    if (high < low) {
+        return -1;
     }
+    if (numbers[index] == value) {
+        return index;
+    } else if (numbers[index] > value) {
+        search(numbers, low, index-1, value);
+    } else if (numbers[index] < value) {
+        search(numbers, index+1, high, value);
+    }
+
 
 	return -1;
 }
