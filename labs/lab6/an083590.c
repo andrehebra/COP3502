@@ -3,22 +3,21 @@
 
 int search(int numbers[], int low, int high, int value) 
 {
-
-    int index = ((high - low) / 2) + low;
-
     if (high < low) {
         return -1;
     }
+
+    int index = ((high - low) / 2) + low;
+
     if (numbers[index] == value) {
         return index;
     } else if (numbers[index] > value) {
-        search(numbers, low, index-1, value);
+        return search(numbers, low, index-1, value);
     } else if (numbers[index] < value) {
-        search(numbers, index+1, high, value);
+        return search(numbers, index+1, high, value);
     }
 
-
-	return -1;
+    return -1;
 }
 
 void printArray(int numbers[], int sz)
