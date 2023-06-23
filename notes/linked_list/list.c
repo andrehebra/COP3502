@@ -6,13 +6,13 @@ struct node {
     struct node* next;
 };
 
-void insertAtBeginning(int value, struct node *phead) {
+void insertAtBeginning(int value, struct node **phead) {
 
     struct node *newNode = malloc(sizeof(struct node));
 
     newNode->value = value;
-    newNode->next = phead;
-    phead = newNode;
+    newNode->next = *phead;
+    *phead = newNode;
 
 }
 
@@ -39,15 +39,17 @@ void search() {
 }
 
 int main() {
-    struct node *phead = NULL;
+    struct node **phead = NULL;
 
-    insertAtBeginning(3,phead);
-    insertAtBeginning(2,phead);
     insertAtBeginning(1,phead);
-    insertAtBeginning(0,phead);
+    insertAtBeginning(2,phead);
+    insertAtBeginning(3,phead);
+    insertAtBeginning(4,phead);
     insertAtBeginning(5,phead);
+    insertAtBeginning(6,phead);
+    insertAtBeginning(7,phead);
 
-    display(phead);
+    display(*phead);
 
     return 0;
 }

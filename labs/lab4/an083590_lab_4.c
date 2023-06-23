@@ -30,7 +30,7 @@ char* toCString(node* head)
 {
 	int stringLength = length(head);
 
-	char* string = malloc(sizeof(char)*stringLength + 1);
+	char* string = malloc(sizeof(char) * (stringLength + 1));
 
 	for (int i = 0; i < stringLength; i++) {
 		string[i] = head->letter;
