@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct stack {
     char stack[1000];
@@ -7,32 +8,48 @@ typedef struct stack {
 } stack;
 
 void initialize(stack *stack) {
-
+    for (int i = 0; i < stack->size; i++) {
+        stack->stack[i] = 'a';
+    }
 };
 
 void push(stack *stack, char value) {
+    for (int i = stack->size - 1; i >= 0; i--) {
+        stack->stack[i+1] = stack->stack[i];
+    }
 
+    stack->stack[0] = value;
 }
 
 char pop(stack *stack) {
     char value = stack->stack[0];
 
-    for (int i = stack->size; i > 0; i--) {
-        
+    for (int i = 0; i < stack->size - 1; i++) {
+        stack->stack[i] = stack->stack[i + 1];
+    }
+
+    return value;
+}
+
+void printStack(stack *stack) {
+    for (int i = 0; i < stack->size; i++) {
+        if (stack->stack[i] != '\0') {
+            printf("%c\n", stack->stack[i]);
+        }
     }
 }
 
 int isPalindrome(char *str) {
-    struct stack s;
-    initialize(&s);
+    stack *s = malloc(sizeof(stack));
+    initialize(s);
     int len = strlen(str);
 
     for (int i = 0; i < len; i++) {
-        push(str[i]);
+        push(s, str[i]);
     }
 
     for (int j = 0; j < len; j++) {
-        if (pop() != str[j]) {
+        if (pop(s) != str[j]) {
             return 0;
         }
     }
@@ -42,5 +59,19 @@ int isPalindrome(char *str) {
 
 
 int main() {
+
+    stack *s = malloc(sizeof(stack));
+
+    initialize(s);
+
+    push(s, 'a');
+    push(s, 'a');
+    push(s, 'a');
+    push(s, 'a');
+    push(s, 'a');
+
+    printStack(s);
+
+    printf("%c", s->stack[0]);
 
 }
