@@ -8,8 +8,9 @@ typedef struct stack {
 } stack;
 
 void initialize(stack *stack) {
+    stack->size = 1000;
     for (int i = 0; i < stack->size; i++) {
-        stack->stack[i] = 'a';
+        stack->stack[i] = '\0';
     }
 };
 
@@ -65,13 +66,15 @@ int main() {
     initialize(s);
 
     push(s, 'a');
-    push(s, 'a');
-    push(s, 'a');
-    push(s, 'a');
-    push(s, 'a');
+    push(s, 'b');
+    push(s, 'c');
+    push(s, 'd');
+    push(s, 'e');
 
     printStack(s);
 
-    printf("%c", s->stack[0]);
+    printf("\n\n%c", pop(s));
+
+    printStack(s);
 
 }
