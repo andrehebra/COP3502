@@ -9,20 +9,19 @@ typedef struct node {
 
 //insert m after all of the nodes containing n
 void insertAfterN(node* head, int m, int n) {
-    node *tempPtr = head;
-
-    while (tempPtr != NULL) {
-        if (tempPtr->data == n) {
-            node *add = malloc(sizeof(node));
-            add->data = m;
-            add->next = tempPtr->next;
-            tempPtr->next = add;
-        }
 
 
-        tempPtr = tempPtr->next;
+    if (head == NULL) return;
+
+    if (head->data == n) {
+        node *add = malloc(sizeof(node));
+        add->data = m;
+        add->next = head->next;
+        head->next = add;
+        return insertAfterN(head->next->next, m, n);
     }
 
+    insertAfterN(head->next, m, n);
 }
 
 void insertList(node **head, int data) {
