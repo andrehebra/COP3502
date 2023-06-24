@@ -41,16 +41,21 @@ void printStack(stack *stack) {
 }
 
 int isPalindrome(char *str) {
-    stack *s = malloc(sizeof(stack));
-    initialize(s);
+    stack s;
+    initialize(&s);
     int len = strlen(str);
+    int i;
 
-    for (int i = 0; i < len; i++) {
-        push(s, str[i]);
+    for (i = 0; i < len / 2; i++) {
+        push(&s, str[i]);
     }
 
-    for (int j = 0; j < len; j++) {
-        if (pop(s) != str[j]) {
+    if (len % 2 != 0) {
+        i++;
+    }
+
+    for (i; i < len; i++) {
+        if (pop(&s) != str[i]) {
             return 0;
         }
     }
@@ -61,20 +66,8 @@ int isPalindrome(char *str) {
 
 int main() {
 
-    stack *s = malloc(sizeof(stack));
+    char *string = "yay";
 
-    initialize(s);
-
-    push(s, 'a');
-    push(s, 'b');
-    push(s, 'c');
-    push(s, 'd');
-    push(s, 'e');
-
-    printStack(s);
-
-    printf("\n\n%c", pop(s));
-
-    printStack(s);
+    printf("%d", isPalindrome(string));
 
 }
